@@ -111,6 +111,7 @@ urlpatterns += patterns('',
 # django-tagging-ext url definitions
 from blog.models import Post
 from bookmarks.models import BookmarkInstance
+from photos.models import Image
 from tagging.models import TaggedItem
 
 tagged_models = (
@@ -120,6 +121,10 @@ tagged_models = (
   ),
   dict(title="Bookmarks",
     query=lambda tag : TaggedItem.objects.get_by_model(BookmarkInstance, tag),
+  ),
+  dict(title="Photos",
+    query=lambda tag: TaggedItem.objects.get_by_model(Image, tag).filter(safetylevel=1),
+    custom_template="pinax_tagging_ext/photos.html",    
   ),
 )
 
