@@ -46,7 +46,6 @@ urlpatterns = patterns('',
     (r'^authsub/', include('authsub.urls')),
     (r'^profiles/', include('profiles.urls')),
     (r'^blog/', include('blog.urls')),
-    (r'^tags/', include('tag_app.urls')),
     (r'^invitations/', include('friends_app.urls')),
     (r'^notices/', include('notification.urls')),
     (r'^messages/', include('messages.urls')),
@@ -108,6 +107,33 @@ urlpatterns += patterns('',
     url('^tweets/friends_tweets/$', 'friends_app.views.friends_objects', kwargs=friends_tweets_kwargs, name="friends_tweets"),
     url('^bookmarks/friends_bookmarks/$', 'friends_app.views.friends_objects', kwargs=friends_bookmarks_kwargs, name="friends_bookmarks"),
 )
+
+# django-tagging-ext url definitions
+from blog.models import Post
+from bookmarks.models import BookmarkInstance
+from tagging.models import TaggedItem
+
+tagged_models = (
+  dict(title="Blog Posts",
+    query=lambda tag : TaggedItem.objects.get_by_model(Post, tag).filter(status=2),
+    custom_template="tagging_ext/default_template.html",
+  ),
+  dict(title="Bookmarks",
+    query=lambda tag : TaggedItem.objects.get_by_model(BookmarkInstance, tag),
+  ),
+)
+
+tagging_ext_kwargs = {
+  'tagged_models':tagged_models,
+  #'default_template':'custom_templates/special.html'
+}
+
+urlpatterns += patterns('',
+  url(r'^tags/(?P<tag>.+)/(?P<model>.+)$', 'tagging_ext.views.tag_by_model', kwargs=tagging_ext_kwargs, name='tagging_ext_tag_by_model'),
+  url(r'^tags/(?P<tag>.+)$', 'tagging_ext.views.tag', kwargs=tagging_ext_kwargs, name='tagging_ext_tag'),
+)
+
+
 
 if settings.SERVE_MEDIA:
     urlpatterns += patterns('',
