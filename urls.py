@@ -117,7 +117,7 @@ from tagging.models import TaggedItem
 tagged_models = (
   dict(title="Blog Posts",
     query=lambda tag : TaggedItem.objects.get_by_model(Post, tag).filter(status=2),
-    custom_template="tagging_ext/default_template.html",
+    custom_template="pinax_tagging_ext/blogs.html",
   ),
   dict(title="Bookmarks",
     query=lambda tag : TaggedItem.objects.get_by_model(BookmarkInstance, tag),
