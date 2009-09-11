@@ -181,9 +181,10 @@ INSTALLED_APPS = (
     'signup_codes',
     'tribes',
     'photos',
-    'tag_app',
+    #'tag_app',
     'topics',
     'groups',
+    'tagging_ext',
     
     'django.contrib.admin',
 
