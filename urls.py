@@ -135,7 +135,8 @@ tagging_ext_kwargs = {
 
 urlpatterns += patterns('',
   url(r'^tags/(?P<tag>.+)/(?P<model>.+)$', 'tagging_ext.views.tag_by_model', kwargs=tagging_ext_kwargs, name='tagging_ext_tag_by_model'),
-  url(r'^tags/(?P<tag>.+)$', 'tagging_ext.views.tag', kwargs=tagging_ext_kwargs, name='tagging_ext_tag'),
+  url(r'^tags/(?P<tag>.+)/$', 'tagging_ext.views.tag', kwargs=tagging_ext_kwargs, name='tagging_ext_tag'),
+  url(r'^tags/$', 'tagging_ext.views.index', name='tagging_ext_index'),  
 )
 
 
