@@ -130,6 +130,7 @@ tagged_models = (
 
 tagging_ext_kwargs = {
   'tagged_models':tagged_models,
+  # You can add your own special template to be the default
   #'default_template':'custom_templates/special.html'
 }
 
