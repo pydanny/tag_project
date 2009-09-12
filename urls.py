@@ -117,15 +117,15 @@ from tagging.models import TaggedItem
 tagged_models = (
   dict(title="Blog Posts",
     query=lambda tag : TaggedItem.objects.get_by_model(Post, tag).filter(status=2),
-    custom_template="pinax_tagging_ext/blogs.html",
+    content_template="pinax_tagging_ext/blogs.html",
   ),
   dict(title="Bookmarks",
     query=lambda tag : TaggedItem.objects.get_by_model(BookmarkInstance, tag),
-    custom_template="pinax_tagging_ext/bookmarks.html",        
+    content_template="pinax_tagging_ext/bookmarks.html",        
   ),
   dict(title="Photos",
     query=lambda tag: TaggedItem.objects.get_by_model(Image, tag).filter(safetylevel=1),
-    custom_template="pinax_tagging_ext/photos.html",    
+    content_template="pinax_tagging_ext/photos.html",    
   ),
 )
 
